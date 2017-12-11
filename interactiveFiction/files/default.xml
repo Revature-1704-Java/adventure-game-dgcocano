@@ -1,0 +1,124 @@
+<game>
+				<room name="NoExit">
+				</room>
+				<room name="quit"></room>
+				<room name="Victory">
+								<description>Congratulations! You've found the exit!</description>
+								<object name="box">
+												<look>The box is ornately carved, gold etched into its surface displaying a bold #1. Which you are, of course.</look>
+												<description>There is a box on top of a pedestal, bathed in a spotlight.</description>
+												<open>true</open>
+												<action name="open">You open the box, revealing the contents.</action>
+												<scenery>true</scenery>
+												<object name="trophy">
+																<look>The trophy is a blazing gold, iridescent in the spotlight</look>
+																<action name="display">Proudly, and without hesitation, you bring the trophy above your head with both hands, prominently displaying your prize to the empty room.</action>
+																<action name="take">You take the trophy. It is warm to the touch, and has a nice weight to it.</action>
+												</object>
+								</object>
+								<exit name="quit" to="quit"></exit>
+				</room>
+				<room name="Center">
+								<description>This is the center room description</description>
+								<player name="Player">
+								</player>
+								<action name="climb">You climb.</action>
+								<action name="go">You go.</action>
+								<exit name="north" to="North"></exit>
+								<exit name="south" to="South"></exit>
+								<exit name="east" to="East"></exit>
+								<exit name="west" to="West"></exit>
+								<exit name="up" to="Up"></exit>
+								<exit name="down" to="Down"></exit>
+								<object name="bicycle">
+												<action name="ride">You attempt to ride the bike, but quickly remember that you've never done so before.</action>
+								</object>
+								<object name="toddler">
+												<object name="candy"></object>
+												<action name="poke">You poke the small child. He bites your finger, and you quickly retract it</action>
+								</object>
+								<object name="orange">
+												<action name="take">You take the orange orange. The room is a lot less colorful now</action>
+												<alias>orange orange</alias>
+												<scenery>true</scenery>
+												<look>The orange orange is quite orange.</look>
+												<description>On the floor is a very vibrantly orange orange</description>
+								</object>
+								<object name="grape">
+												<action name="take">You snatch up the grape and put it in your pocket.</action>
+								</object>
+								<object name="apple">
+												<listalias>gigantic apple</listalias>
+												<action name="take">You take the humungous apple. It your pocket is now bulging beyond what should be possible</action>
+												<action name="bite">You take a bite of the humungous apple. It barely makes a dent in its formidable size.</action>
+								</object>
+								<object name="rope">
+												<action name="take">You coil the rope and latch it over your shoulder</action>
+												<object name="inrope2"></object>
+												<object name="inrope"></object>
+												<action name="climb">You climb the rope, inching closer until you reach the roof. You jump back down.</action>
+								</object>
+				</room>
+				<room name="Up">
+								<exit name="up" to="Victory"></exit>
+								<action name="die">You die</action>
+								<object name="BallIn">
+								</object>
+								<exit name="down" to="Center"></exit>
+				</room>
+				<room name="Down">
+								<exit name="down" to="Hell">
+								</exit>
+								<object name="stairs">
+												<scenery>true</scenery>
+												<look>The stairs lead down</look>
+								</object>
+								<exit name="stairs" to="Hell"></exit>
+								<exit name="up" to="Center"></exit>
+				</room>
+				<room name="North">
+								<object name="outChest">
+												<visible>false</visible>
+												<action name="hide">You hide the exterior of everything outside of the chest</action>
+								</object>
+								<object name="chest">
+												<open>false</open>
+												<action name="open">You open the chest and reveal it's contents. Inside is a red book.</action>
+												<object name="inChest">
+																<visible>false</visible>
+																<action name="take">You take the interior of the chest, somehow</action>
+												</object>
+												<object name="book">
+																<alt>necronomicon</alt>
+																<action name="take">You pick up the book and tuck it under your arm</action>
+																<look>The book is bound with a gossamer red leather. The title is scratched onto it and reads "NECRONOMICON"</look>
+																<action name="read">Your mind twists and breaks as you turn the pages. The book slams shut after you make it through a few pages.</action>
+												</object>
+								</object>
+								<exit name="south" to="Center"></exit>
+				</room>
+				<room name="East">
+								<exit name="west" to="Center"></exit>
+				</room>
+				<room name="South">
+								<exit name="north" to="Center"></exit>
+				</room>
+				<room name="West">
+								<exit name="east" to="Center"></exit>
+				</room>
+				<room name="Hell">
+								<exit name="up" to="Down"></exit>
+				</room>
+				<commands>
+								<command name="go">
+												<alt>head</alt>
+												<alt>walk</alt>
+												<alt>run</alt>
+								</command>
+								<command name="take">
+												<alt>grab</alt>
+												<alt>bring</alt>
+								</command>
+				</commands>
+
+</game>

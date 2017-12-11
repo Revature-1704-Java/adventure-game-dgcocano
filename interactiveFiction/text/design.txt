@@ -1,0 +1,108 @@
+Room
+  Lights
+  Exits
+  Scripts
+  Attributes
+  Objects
+    Description for room description
+      This is a plain old lounge (from lounge description) with an old beige carpet and peeling wallpaper. (all from loung description)
+				There is a (from room default object list prefix) object1 (object in room)
+      This is a plain old lounge (from lounge description) with (since it has objects in it) an old beige carpet (from carpet) and (last non scenery object in room) peeling wallpaper
+        Look at ceiling -> (If ceiling is scenery, not in room description but in room) The ceiling is mottled with dark splotches.
+    Description for "look at" commands
+    Prefix for room listing You see (from room object list prefix) a (object prefix) chair ""(object suffix) ,(more than 2 objects in room non scenery) a (table prefix) table(table description), and(last in list) ""(Bob prefix) Bob.
+    Other names
+    Inventory
+      Used to specify if an object can be taken or not
+      Take message - Customize the take to be more than just "You pick it up" -> take newspaper "You fold the newspaper and tuck it neatly under your arm"
+    Use/Give
+    Verbs
+      verb: Description
+      verb: run a script
+    Container
+    Options
+      
+    Ask/Tell
+    Attributes
+      Important Attributes
+				name
+				  Identified by name attribute, effictively ID of the database record, everything needs a name. Somethings automatically get names, like exits.
+				  Names must be unique
+				  Use consistent naming policy
+				  Required, most attributes are optional or have default values
+				alias
+				  What is visible when the object is mentioned, like the list of objects in the room. If no alias, uses name instead.
+				  When matching objects in a command, uses alias attribute first, then name if no alias.
+				alt
+				  String list of alternative names of the object. Use the list when trying to match an object to a command the player has typed.
+				parent
+				  Determines where a thing is. If parent is room, it's in that room. If player, then player is carrying it. If container, in container.
+				  When objects shift to a new area/container their parent changes.
+				  When the player changes room it changes the parent value to that room.
+				look & description 
+				  Descriptions the player will see.
+				  Look attribute is used when player examines an object.
+				  Description is seen when player enters a room.
+				visible & scenery
+				  Booleans, apply to exits as well as objects.
+				  If an object isn't visible, it effectively doesn't exist. Player can't see or interact with it.
+				  Especially useful for exits. Hole in wall, etc.
+				  Scenery can also hide objects, player can interact with it but it isn't in the object list. 
+				  Best used for objects that are mentioned in the scene description, so the player is more expected to attempt to interact with them.
+				  Objects in the scenery that can be picked up are interesting, when such an object is picked up, the scenery flag is set to false.
+				  Room description: This is an empty room, dominated by a marble fireplace, {if ornament.scenery:, with a bizzare ornament on the mantelpiece}.
+				  This is an empty room, dominated by a marble fireplace, with a bizzare ornament on the mantelpiece.
+				  This is an empty room, dominated by a marble fireplace.
+				  Can be done by keeping this a string, then when printing the description of the room, parsing via DescriptionParser, checks for {}, object name, attribute. Make a switch for those strings with every important attribute.
+				  Those attributes are listed above.
+				visited
+				  Visited attribute gets set to true when player visits a room. -> First time vs not. 
+				  (In text file) visited:{description="New description"
+				to
+				  For exits, the to attribute is an object, where the exit goes to.
+				locked & isOpen
+				  Containers can be opened or locked, an item that is openable/closeable can be opened;
+				  To implement this in java might need an extra boolean isOpenable
+				various verbs
+				  take,drop,use,open,close,lock,unlock are the global commands that follow this important attribute schema.
+    Objects
+
+Everything in Quest is an object, so they can parent and child themselves however they want
+Exits parents are the room they are in that have a to direction that points to another room
+
+Commands can exist globally, or in particular rooms 
+Command patterns - look at #object#
+When the player types something it is checked against all available command patterns 
+
+Verbs are a shortcut for commands, many commands follow the same pattern and it's easier to have verb mechanism handle it
+
+Game contains attributes like name of game, options such as how to print room descriptions, and display settings 
+
+Attributes. Elements can have an unlimited number of attributes. stores things such as the object description, alternative object names, the behaviour when the object is taken, which objects can be used on an object, etc.
+Scripts can be attributes, and I don't know how to make this work from java, to change attributes elsewhere except via hardcoded quests that a player can take. Hard part is coding the flags into a text file for parsability
+quest denotation|flag for quest|result of quest
+q|(optional room)(optional command)|(optional object/room)(optional object)(optional command)(optional attribute)(optional string)
+for flag it can be a command done in a certain room
+for result
+  room->object->attribute->string changes the attribute of that object, like the description
+  room->object->command->string changes the command result to that in the string
+q|firstroom "turn on tv" or tv "turn on"|firstroom tv "watch" "You watch the tv until you start to wish you were there, pioneering instead of lazing about watching tv.
+q|firstroom "turn off tv" or tv "turn on"|firstroom tv "watch" "The tv is off, and the screen reflects your face, staring back at you.
+
+
+hit #object"; strike #object#; attack #object# -> player.parent.hasObject(object);
+
+
+Create a command -> climb
+Parser now recognizes climb as a command, default is "Nothing to " command " here" or "Nothing to climb here"
+climb #object# -> default You can't climb that!
+
+List of command words and meanings that map to them
+List of command verbs and the structures that follow them
+
+hug;give #object1# a hug; give #object1" hug
+
+hug #object#. Goes to object and checks for hug, if not it goes to default result.
+give #object# hug. Goes through parser to check for viable commands, identifying that the middle term refers to an object and that the give and hug fit maps this result to hug #object#
+hug wall -> hug recognized as command, wall recognized as object
+give wall hug -> wall recognized object, check if give object hug is in command meanings, like word meanings but maps interpretations to their commands

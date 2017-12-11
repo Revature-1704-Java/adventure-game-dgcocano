@@ -1,0 +1,7 @@
+OOP - interfaces, polymorphism
+Maven - junit
+Packages
+File I/O - optional
+git - vcs
+Collections/Maps
+DesignPatterns - optional Singleton Factory DAO
