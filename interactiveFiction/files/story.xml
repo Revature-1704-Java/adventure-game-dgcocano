@@ -1,0 +1,112 @@
+<game>
+				<room name="trapped">
+								<player name="Player">
+								</player>
+								<action name="look">You look more closely at the room. It really is dismal, the carpet is in disrepair, the wallpaper is just gross, and the tv is straight up broken.</action>
+								<object name="lightbulb">
+												<look>The lightbulb is flickering, barely operational.</look>
+												<scenery>true</scenery>
+								</object>
+								<object name="box">
+												<look>The box is shabby, just like everything else in here. Not to insult you, just saying</look>
+												<open>false</open>
+												<action name="open">You open up the box, and reveal its mysterious contents... Nothing.</action>
+												<action name="take">You take the box with you, and together you will be unstoppable</action>
+								</object>
+								<object name="wallpaper">
+												<look>The wallpaper is faded, cracked, and peeling. The triple threat that is water damage.</look>
+												<description>Tattered wallpaper clads the room, as much as it can anyway.</description>
+												<scenery>true</scenery>
+								</object>
+								<object name="carpet">
+												<look>The carpet is really dirty. Filthy. It looks caked with dirt in some places.</look>
+								</object>
+								<object name="tv">
+												<look>The tv is smashed to all hell, the screen broken, the antennae bent. I wonder who would ever want this.</look>
+												<action name="take">Of course you do. The broken tv. The smashed tv. The unnecessary tv. I wonder how you're going to carry that, HMMMM? Whatever. You take it</action>
+												<action name="watch">Clever. You watch the remains of the tv screen, imagining what could be if you were doing literally anything else.</action>
+								</object>
+								<description>The room is dimly lit, a light bulb hanging overhead.</description> 
+								<object name="door">
+												<look>The door is steel clad, and looks impenetrable.</look>
+												<description>There is a grey door to the north.</description>
+												<scenery>true</scenery>
+											 	<alias>door</alias>
+												<listalias>door to the north</listalias>
+												<action name="open">You attempt to open the door, and get nothing, the door doesn't budge.</action> 
+												<exit name="north" to="Victory"></exit>
+								</object>
+								<object name="window">
+												<look>The tint is too dark for you to manage to see out of the window. The window is bolted shut, and seems to even be welded in it's current position.</look>
+												<description>A dismal tinted window is embedded in the wall.</description>
+												<scenery>true</scenery>
+												<action name="open">You try and you try, but the window doesn't budge</action>
+								</object>
+								<object name="hatch">
+												<look>The hatch isn't locked by any visible means, and seems to be a bit rickety</look>
+												<description>A faded wooden hatch is built into the floor.</description>
+												<scenery>true</scenery>
+												<open>false</open>
+												<action name="open">You open the hatch. When it reaches its full open point, the hinges lock in place.</action>
+												<exit name="hatch" to="cellar">
+												</exit>
+								</object>
+
+				</room>
+				<room name="cellar">
+								<action name="look">You look closely around you. There is a slight glimmer of light off to the north. You know, this place is so, so, so, very dark. You are likely to be eaten by a grue.</action>
+								<description>The cellar is a dank and dark place. There is barely light coming through from the hole above.</description>
+								<object name="hatch">
+												<description>The hatch is open above you, too far to reach.</description>
+												<look>No really, the hatch is simply too far for you to ever reach it. Seriously.</look>
+												<action name="go">Honestly. Why do I bother to tell you the truth.</action>
+												<scenery>true</scenery>
+								</object>
+								<object name="water">
+												<description>There is water up to your ankles here.</description>
+												<look>The water is extremely grotesque. Upon a closer look it is more similar to sludge.</look>
+												<scenery>true</scenery>
+												<action name="drink">You get down, cup your hands, and drink from the sweet, sweet, chalice that is the floor.</action>
+								</object>
+								<exit name="north" to="exit"></exit>
+								<exit name="forward" to="exit"></exit>
+				</room>
+
+				<room name="exit">
+								<description>The exit. In some way or another, an escape.</description>
+								<action name="look">Upon closer viewing, there is a grue near the exit. (Not Really)</action>
+								<object name="grue">
+												<scenery>true</scenery>
+												<look>What? You don't believe me? Well, if there was a grue, hypothetically of course, it'd be eyeing you up quite a bit right about now</look>
+												<action name="take">Sure, you can do that if you want. You pick up the invisible, untouchable, undetectable, unnoticeable grue and carry it with you.</action>
+												<listalias>I can't believe you don't believe me, seriously, a GRUE? As if I'd make you deal with that.</listalias>
+								</object>
+								<object name="gate">
+												<open>false</open>
+												<description>THE gate, the only thing keeping you from escape.</description>
+												<scenery>true</scenery>
+												<action name="open">Finally, the outside is waiting for you.</action>
+												<exit name="outside" to="Victory">
+												</exit>
+								</object>
+				</room>
+				<room name="NoExit">
+				</room>
+				<room name="quit"></room>
+				<room name="Victory">
+								<description>Congratulations! You've found the exit!</description>
+								<object name="box">
+												<look>The box is ornately carved, gold etched into its surface displaying a bold #1. Which you are, of course.</look>
+												<description>There is a box on top of a pedestal, bathed in a spotlight.</description>
+												<open>true</open>
+												<action name="open">You open the box, revealing the contents.</action>
+												<scenery>true</scenery>
+												<object name="trophy">
+																<look>The trophy is a blazing gold, iridescent in the spotlight</look>
+																<action name="display">Proudly, and without hesitation, you bring the trophy above your head with both hands, prominently displaying your prize to the empty room.</action>
+																<action name="take">You take the trophy. It is warm to the touch, and has a nice weight to it.</action>
+												</object>
+								</object>
+								<exit name="quit" to="quit"></exit>
+				</room>
+</game>

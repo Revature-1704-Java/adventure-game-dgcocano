@@ -62,7 +62,7 @@ public class GameEngine {
 								xmlParser.loadFile();
 								rooms = xmlParser.loadRooms();
 								for(String room : rooms.keySet()) {
-												System.out.println("Loaded room " + room);
+												//System.out.println("Loaded room " + room);
 								}
 								objects = xmlParser.loadObjects();
 								actions = xmlParser.loadActions();
@@ -85,7 +85,7 @@ public class GameEngine {
 								}
 								for(String obj : objects.keySet()) {
 												String parentName = objects.get(obj).getParentName();
-												System.out.println("Parent name for " + obj + " " + parentName);
+												//System.out.println("Parent name for " + obj + " " + parentName);
 												objects.get(obj).setParent(objects.get(parentName));
 								}
 								//Default actions with special behavior
@@ -216,11 +216,15 @@ public class GameEngine {
 
 								//for(String act : currentRoom.getAvailableActions()) {
 												//acts += act + " ";
-								//}
+								//}/
+								System.out.println();
+								System.out.println(currentRoom.describeRoom());
+								System.out.println(player.describeInv());
+								System.out.println();
 								System.out.println(actionString);
-								System.out.println(objectString);
+								//System.out.println(objectString);
 								System.out.println(exitString);
-								System.out.println(currentRoom.describeRoom() + "\n");
+								System.out.println();
 								System.out.print("> ");
 								//Take input
 								String command = input.nextLine();
@@ -230,6 +234,7 @@ public class GameEngine {
 								//With dictionary definitions produced by aliases and alt names
 								String[] tokens = command.split("\\s+");
 								doCommand(tokens);
+								System.out.println();
 								}
 								//Interpret command structure for viable commands, check if it matches a command structure
 								//Verbs with no special command structure default to VERB OBJECT

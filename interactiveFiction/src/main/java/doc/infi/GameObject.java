@@ -162,7 +162,7 @@ public class GameObject {
 																Element eNode = (Element) nNode;
 																this.objects.put(eNode.getAttribute("name"), new GameObject(eNode));
 																this.exits.put(eNode.getAttribute("name"), new GameObject(eNode));
-																System.out.println("Exit " + eNode.getAttribute("name") + " for " + name + " leading to "  + this.objects.get(eNode.getAttribute("name")).getTo());
+																//System.out.println("Exit " + eNode.getAttribute("name") + " for " + name + " leading to "  + this.objects.get(eNode.getAttribute("name")).getTo());
 												}
 								}
 				}
@@ -188,7 +188,7 @@ public class GameObject {
 								to = node.getAttribute("to");
 								actions.put("go", to);
 								availableActions.add("go");
-								System.out.println("implicit go for " + name + " leading to " + to);
+								//System.out.println("implicit go for " + name + " leading to " + to);
 				}
 
 				private boolean hasAction(String action) {
@@ -292,6 +292,18 @@ public class GameObject {
 				}
 
 
+				public String describeInv() {
+								String ret = "You have";
+								for(String obj : getObjects().keySet()) {
+												GameObject object = getObjects().get(obj);
+												if(objects.get(obj).getVisible() && !objects.get(obj).getScenery()) {
+																ret += " " + prefix(object.getListAlias()) + object.getListAlias();
+												}
+								}
+								if(ret.equals("You have")) return "You don't have anything.";
+								return ret;
+				}
+
 				public String describeRoom() {
 								String ret = description;
 								for(String obj : getAvailableObjects()) {
@@ -299,7 +311,7 @@ public class GameObject {
 																ret += " " + objects.get(obj).getDescription();
 												}
 								}
-								ret += getDetails();
+								ret += "\n" + getDetails();
 								return ret;
 				}
 				public String take(GameObject container, String object) {
@@ -354,6 +366,9 @@ public class GameObject {
 																for(String act : getObject.getAvailableActions()) {
 																				container.getAvailableActions().add(act);
 																				//getObject.getParent().getAvailableActions().add(act);
+																}
+																for(String ex : getObject.getExits().keySet()) {
+																				container.getExits().put(ex, getObject.getExits().get(ex));
 																}
 												}
 								}
